@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const target = path.resolve(root, 'work/worker-assets');
+if (!target.startsWith(path.resolve(root, 'work') + path.sep)) throw new Error('Unexpected asset directory.');
+await fs.mkdir(target, { recursive: true });
+for (const name of ['demo', 'src', 'assets', 'vendor']) await fs.cp(path.join(root, name), path.join(target, name), { recursive: true });
+await fs.copyFile(path.join(root, 'demo/index.html'), path.join(target, 'index.html'));
+console.log('Worker static assets prepared.');

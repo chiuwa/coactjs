@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5f6">
+  <meta name="description" content="Coact.js is an embeddable shared-action layer for cursors, frames, windows, and spreadsheet cells.">
+  <title>Coact.js — Shared action workspace</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/coact-favicon.svg">
+  <link rel="stylesheet" href="/demo/demo.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <h1 class="sr-only">Coact.js enterprise collaboration canvas</h1>
+      <a class="wordmark" href="/" aria-label="Coact.js home">
+        <img class="wordmark-mark" src="/assets/icons/coact-mark-transparent.svg" alt="">
+        <span>coact<span class="js">.js</span></span>
+      </a>
+      <div class="workspace-breadcrumb" aria-label="Workspace location"><span>Product workspace</span><i aria-hidden="true">/</i><strong>Sprint room</strong></div>
+      <div class="top-actions">
+        <button class="room-chip" id="room-chip" type="button" aria-label="Copy room link"><span>Room</span><strong id="room-name">demo</strong></button>
+        <div class="presence" aria-label="People in this room"><div class="avatar-stack" id="avatar-stack"></div><span class="online-count" id="online-count">1</span></div>
+        <div class="connection-pill" data-state="connecting" id="connection-dot" role="status" aria-live="polite"><span class="connection-dot"></span><span id="connection-label">Connecting</span></div>
+        <span class="action-rule" aria-hidden="true"></span>
+        <button class="icon-button" id="activity-button" type="button" data-tip="Activity" aria-label="Open activity journal" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h10M4 20h7"></path></svg></button>
+        <button class="icon-button" id="code-button" type="button" data-tip="Embed code" aria-label="Open embed code" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"></path></svg></button>
+        <button class="icon-button" id="copy-button" type="button" data-tip="Copy invite" aria-label="Copy invite link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 14.5l5-5"></path><path d="M7.2 16.8l-1 .9a3.6 3.6 0 01-5-5l3.2-3.2a3.6 3.6 0 015 0"></path><path d="M16.8 7.2l1-.9a3.6 3.6 0 015 5l-3.2 3.2a3.6 3.6 0 01-5 0" transform="translate(-1.7 1.7)"></path></svg></button>
+        <button class="invite-button peer-button" id="peer-button" type="button" data-tip="Open second tab" aria-label="Open a second demo tab"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="13" height="11" rx="2"></rect><path d="M8 19h10a2 2 0 002-2V9"></path><path d="M11 9h4M13 7v4"></path></svg><span>Test peer</span></button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="rail" aria-label="Workspace tools">
+        <div class="rail-stack">
+          <button class="rail-button" type="button" data-window="board" aria-label="Board" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M9 4v16M15 4v16"></path></svg><span>Board</span></button>
+          <button class="rail-button" type="button" data-window="notes" aria-label="Notes" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"></path><path d="M15 3v5h4M9 12h6M9 16h6"></path></svg><span>Notes</span></button>
+          <button class="rail-button" type="button" data-window="sheet" aria-label="Sheet" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18M9 4v16M15 4v16"></path></svg><span>Sheet</span></button>
+          <button class="rail-button" type="button" data-window="palette" aria-label="Palette" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"></circle><circle cx="16" cy="8" r="3"></circle><circle cx="8" cy="16" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><span>Palette</span></button>
+          <span class="rail-rule" aria-hidden="true"></span>
+          <button class="rail-button frame-tool" id="frame-button" type="button" aria-label="Draw image frame" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="M4 17l5-5 4 4 2.5-2.5L20 18M18 3v6M15 6h6"></path></svg><span>Frame</span></button>
+        </div>
+        <button class="rail-button rail-reset" id="reset-button" type="button" data-tip="Reset room" aria-label="Reset room"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h11a5 5 0 015 5v0a5 5 0 01-5 5H9"></path><path d="M8 4L4 8l4 4"></path></svg><span>Reset</span></button>
+      </aside>
+
+      <section class="canvas-area">
+        <coact-room id="room" room="demo" safe-bottom="18" placeholder-image="/assets/icons/coact-icon-primary.svg" placeholder-title="Cursors · Frames · Sheets" placeholder-code="npm i coactjs" placeholder-note="COACT PLACEHOLDER"></coact-room>
+        <div class="first-peer" id="first-peer" aria-hidden="true"><svg class="first-peer-arrow" viewBox="0 0 20 24"><path d="M1 1v19l5-4.5 3.5 6.8 4.4-2.1-3.3-6.5H19L1 1Z"></path></svg><span>2nd tab</span></div>
+        <div class="draw-status" id="draw-status" hidden><span class="draw-status-cursor" aria-hidden="true"></span><span>Drag to frame</span><button type="button" id="cancel-draw" aria-label="Cancel drawing"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div>
+        <aside class="code-sheet" id="code-sheet" aria-hidden="true" aria-label="Embed code" inert>
+          <header class="sheet-head">
+            <div class="sheet-tabs" role="tablist" aria-label="Code example"><button class="sheet-tab is-active" type="button" role="tab" aria-selected="true" data-code-tab="html">HTML</button><button class="sheet-tab" type="button" role="tab" aria-selected="false" data-code-tab="js">JS</button><button class="sheet-tab" type="button" role="tab" aria-selected="false" data-code-tab="sync">SYNC</button></div>
+            <div class="sheet-actions"><button class="copy-code" id="copy-code" type="button" data-tip="Copy code" aria-label="Copy code"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2"></path></svg></button><button class="sheet-close" id="sheet-close" type="button" aria-label="Close code panel"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"></path></svg></button></div>
+          </header>
+          <div class="sheet-code-wrap"><pre><code id="code-content"></code></pre></div>
+        </aside>
+        <aside class="code-sheet activity-sheet" id="activity-sheet" aria-hidden="true" aria-label="Activity journal" inert>
+          <header class="sheet-head"><strong>Activity</strong><div class="sheet-actions"><span class="activity-revision" id="activity-revision">rev 0</span><button class="sheet-close" id="activity-close" type="button" aria-label="Close activity panel"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13"></path></svg></button></div></header>
+          <div class="activity-list" id="activity-list"></div>
+        </aside>
+        <button class="sheet-scrim" id="sheet-scrim" type="button" aria-label="Close panel" tabindex="-1"></button>
+        <div class="draft-recovery" id="draft-recovery" role="status" hidden><span id="draft-count">Unsaved changes</span><button id="copy-drafts" type="button">Copy draft</button><button id="dismiss-drafts" type="button" aria-label="Discard unsaved draft">Dismiss</button></div>
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+  <script type="module" src="/demo/demo.js"></script>
+</body>
+</html>

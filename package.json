@@ -1,0 +1,117 @@
+{
+  "name": "coactjs",
+  "version": "0.5.2",
+  "description": "Shared cursors, frames, windows, and spreadsheet actions for collaborative canvases.",
+  "type": "module",
+  "main": "./src/coact.js",
+  "types": "./types/coact.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/coact.d.ts",
+      "import": "./src/coact.js"
+    },
+    "./room": {
+      "types": "./types/coact-room.d.ts",
+      "import": "./src/coact-room.js"
+    },
+    "./core": {
+      "types": "./types/coact.d.ts",
+      "import": "./src/coact.js"
+    },
+    "./styles": {
+      "types": "./types/styles.d.ts",
+      "import": "./src/styles.js"
+    },
+    "./placeholder": {
+      "types": "./types/placeholder.d.ts",
+      "import": "./src/placeholder.js"
+    },
+    "./server": {
+      "types": "./types/server.d.ts",
+      "import": "./server/index.js"
+    },
+    "./worker": {
+      "types": "./types/worker.d.ts",
+      "import": "./server/worker.js"
+    }
+  },
+  "files": [
+    "src",
+    "types",
+    "assets/icons",
+    "README.md",
+    "LICENSE",
+    "demo-screenshot.jpg",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "docs",
+    "ARCHITECTURE_PLAIN.md",
+    "server",
+    "examples/basic",
+    "examples/cloudflare",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "test:browser": "python test/browser.py",
+    "test:types": "tsc --noEmit --strict --lib DOM,ES2022 --module NodeNext --moduleResolution NodeNext test/types.ts",
+    "dev:worker": "node scripts/build-worker-assets.js && wrangler dev --config worker/wrangler.jsonc",
+    "build:worker": "node scripts/build-worker-assets.js && wrangler deploy --dry-run --config worker/wrangler.jsonc --outdir work/worker-bundle",
+    "test:client": "python test/client-regressions.py",
+    "test:worker": "node scripts/build-worker-assets.js && wrangler deploy test/worker-fixture.js --dry-run --config worker/wrangler.jsonc --outdir work/worker-test-bundle && node --test test/worker.smoke.mjs"
+  },
+  "keywords": [
+    "web-component",
+    "multiplayer",
+    "cursor",
+    "presence",
+    "websocket",
+    "collaboration",
+    "canvas",
+    "whiteboard",
+    "image-frame",
+    "spreadsheet",
+    "vanilla-javascript"
+  ],
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "miniflare": "4.20260730.0",
+    "typescript": "5.9.3",
+    "wrangler": "4.162.0",
+    "ws": "^8.18.3"
+  },
+  "bin": {
+    "coactjs": "./server/cli.js"
+  },
+  "peerDependencies": {
+    "ws": "^8.18.3"
+  },
+  "peerDependenciesMeta": {
+    "ws": {
+      "optional": true
+    }
+  },
+  "author": {
+    "name": "chiuwa",
+    "url": "https://github.com/chiuwa"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chiuwa/coactjs.git"
+  },
+  "homepage": "https://github.com/chiuwa/coactjs#readme",
+  "bugs": {
+    "url": "https://github.com/chiuwa/coactjs/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

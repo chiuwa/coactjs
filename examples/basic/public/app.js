@@ -1,0 +1,25 @@
+import { createCoact } from 'coactjs';
+const name = new URLSearchParams(location.search).get('room') || 'example';
+const coact = createCoact('#room', { room: name, endpoint: '/ws' });
+const status = document.querySelector('#status');
+const input = document.createElement('input');
+input.setAttribute('aria-label', 'Shared cell A1'); input.placeholder = 'Write together'; input.readOnly = true;
+coact.element.registerWindow('shared-note', { title: 'Shared note', open: true, content: input });
+const sheet = coact.collection('sheet');
+const render = () => {
+  const lock = coact.locks['sheet.A1'];
+  input.readOnly = lock?.actorId !== coact.self.id;
+  if (input.readOnly || document.activeElement !== input) input.value = sheet.get('A1') || '';
+};
+sheet.subscribe(render);
+coact.on('coact:lock', render);
+input.addEventListener('focus', () => coact.lock.acquire('sheet.A1'));
+input.addEventListener('blur', () => coact.lock.release('sheet.A1'));
+input.addEventListener('input', () => { if (!input.readOnly) sheet.set('A1', input.value); });
+coact.on('coact:presence', ({ detail }) => { status.textContent = `${detail.online} online`; });
+coact.on('coact:status', ({ detail }) => { if (detail.state !== 'online') status.textContent = detail.state; });
+document.querySelector('#frame').onclick = () => coact.element.startFrameDraw();
+document.querySelector('#peer').onclick = () => window.open(location.href, '_blank', 'noopener');
+let drafts = [];
+coact.on('coact:unsaved', ({ detail }) => { drafts = [...drafts, ...detail.operations].slice(-32); while (new TextEncoder().encode(JSON.stringify(drafts)).byteLength > 1024 * 1024 && drafts.length > 1) drafts.shift(); document.querySelector('#notice').hidden = false; });
+document.querySelector('#copy-draft').onclick = async () => { await navigator.clipboard.writeText(JSON.stringify(drafts, null, 2)); document.querySelector('#notice').hidden = true; drafts = []; };
