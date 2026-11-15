@@ -49,6 +49,16 @@ coact.presence.subscribe(({ peers }) => console.log(peers));
 
 Use a browser ESM bundler and connect `/ws` to a Coact server. The browser entry has no runtime dependencies; install `ws` for the Node server. Your app supplies authentication and its storage policy.
 
+## Agent skill
+
+Let your coding agent build with Coact.js:
+
+```sh
+npx skills add chiuwa/coactjs --skill coactjs
+```
+
+Then ask: “Use the coactjs skill to build shared cursors, draggable windows and an editable grid.” [View skill](https://github.com/chiuwa/coactjs/tree/main/skills/coactjs).
+
 ## Explore
 
 [Integration guide](https://github.com/chiuwa/coactjs/blob/main/docs/guide.md) · [Examples](https://github.com/chiuwa/coactjs/tree/main/examples) · [Architecture](https://github.com/chiuwa/coactjs/blob/main/docs/architecture.md) · [Security](https://github.com/chiuwa/coactjs/blob/main/SECURITY.md) · [Resource limits](https://github.com/chiuwa/coactjs/blob/main/docs/resources.md)
