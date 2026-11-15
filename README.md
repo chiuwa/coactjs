@@ -9,7 +9,7 @@
   <a href="https://github.com/chiuwa/coactjs/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-8fa18c" alt="Apache-2.0"></a>
 </p>
 
-![Coact.js workspace](https://raw.githubusercontent.com/chiuwa/coactjs/main/demo-screenshot.jpg)
+![Four people collaborating with shared cursors, windows and cells](https://raw.githubusercontent.com/chiuwa/coactjs/main/assets/demo.gif)
 
 Shared cursors, windows, image frames and spreadsheet cells. A browser-native JavaScript component with TypeScript declarations and an optional synchronization server.
 
