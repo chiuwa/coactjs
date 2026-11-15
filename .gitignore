@@ -15,3 +15,17 @@ work/
 coverage/
 playwright-report/
 test-results/
+
+# Local review notes and exploratory screenshots
+/ARCHITECTURE_PLAIN.md
+/CODE_REVIEW.md
+/CODE_REVIEW_CURRENT.md
+/DESIGN.md
+/NEXT_STEPS.md
+/PRODUCT.md
+/VERIFICATION.md
+/activity-screenshot.jpg
+/code-sheet-screenshot.jpg
+/empty-frame-screenshot.jpg
+/lock-screenshot.jpg
+/mobile-screenshot.jpg

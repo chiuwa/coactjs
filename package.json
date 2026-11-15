@@ -45,7 +45,6 @@
     "CHANGELOG.md",
     "SECURITY.md",
     "docs",
-    "ARCHITECTURE_PLAIN.md",
     "server",
     "examples/basic",
     "examples/cloudflare",

@@ -1,10 +1,10 @@
 # Changelog
 
-## 0.5.2 — unreleased (2026-11-16)
+## 0.5.2 (2026-11-16)
 
 - Add chiuwa author, GitHub repository, homepage, issue tracker and public npm registry metadata.
 - Adopt Apache-2.0 for this release with a NOTICE file; the published 0.5.1 remains MIT-licensed.
-- Update installation instructions for the published package. Runtime behavior is unchanged.
+- Add a concise GitHub/npm README with the logo and badges; move detailed examples to docs/guide.md. Remove internal notes and extra screenshots from the public tree. Runtime behavior is unchanged.
 
 ## 0.5.1 — published on npm
 

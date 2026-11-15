@@ -30,4 +30,4 @@ Window content remains application-owned. HTML and arbitrary textarea data do no
 
 Node ACKs commit memory, which is lost on process restart. Worker ACKs commit bounded SQLite room state, which survives reconstruction but is intentionally deleted after idle retention. The activity journal stores operation summaries and cannot reconstruct a workbook. Permanent document storage, external-file transactions, backups, rich-text CRDT and multi-runtime orchestration remain application responsibilities.
 
-[Protocol](protocol.md) · [Resources](resources.md) · [Security](../SECURITY.md) · [Plain-language guide](../ARCHITECTURE_PLAIN.md)
+[Protocol](protocol.md) · [Resources](resources.md) · [Security](../SECURITY.md)
